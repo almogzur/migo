@@ -1,57 +1,93 @@
 import { Stack, Button } from "@mui/material";
 import Image from "next/image";
 import CustomizedDialogs from "./dialog";
+import WhatsAppBtn from "./whatsapp_btn";
+import MailBtn from "@/components/mail_btn";
+import { useRouter } from "next/router";
+import { useWindowSize } from "@/context/window_size";
+import MailButton from "@/components/mail_btn";
+
+
 export default function NavigationBar() {
 
+    const router = useRouter();
+    const { isMobile, isTablet } = useWindowSize();
+
+      const isSmallScreen = isMobile || isTablet;
+      const imageWidthSize = isMobile ? 100 : isTablet ? 120 : 140;
+        const imageHeightSize = isMobile ? 100 : 120;
 
 
     return (
+
         <Stack
             direction={"row"}
             width={"100%"}
+            height={"70px"}
+            alignItems={"center"}
+            
+            
         >
             <Stack
                 direction={"row"}
-                sx={{ marginRight: "20px" }}
-                gap={2}
+                sx={{  marginRight: isSmallScreen ? 0 : "20px" }}
+                gap={0}
                 alignItems={"center"}
                 justifyItems={"center"}
                 alignContent={"center"}
-
             >
-               
-                <CustomizedDialogs 
-                    openButtonText="צור קשר"
+
+                <CustomizedDialogs
+                    openBtnText="צור קשר"
                     openBtnProps={{
-                        variant: "contained",
-                        sx: { marginLeft: "25px", borderRadius: 2, width: "100px" }
-                    }} 
-                    closedBittonText={"סגור"}
-                                         />
-                <Button variant="text" >אודות</Button>
-                <Button variant="text" >עזרה</Button>
- 
+                              
+                        sx: { 
+                         
+                             width: "100px",
+                  
+
+                             }
+                    }}
+                    modalTitle="אפשריות יצירת קשר "
+                    closedBtnText={"סגור"}
+                >
+                    <WhatsAppBtn />
+                
+                    <MailButton />
+                
+
+
+
+                </CustomizedDialogs>
+
+                {router.pathname !== "/about" &&
+                 <Button
+                    variant="text"
+                    onClick={() => router.push("/about")}
+                >אודות
+                </Button>}
+
+                {router.pathname !== "/" &&
+                    <Button
+                        onClick={() => router.push("/")}
+                        variant="text"
+                    >
+                        דף הבית
+                    </Button>
+                }
             </Stack>
 
 
-            <Stack
-                direction={"row"}
-                sx={{
-                    marginLeft: "auto"
-                }}
-            >
 
-            </Stack>
             <Image
                 src="/migo.png"
                 alt="migo"
-                width={120}
-                height={120}
-                style={{
-                    marginLeft: 10,
-
-                     }} />
+                width={imageWidthSize}
+                height={imageHeightSize}
+                style={{ marginRight:'auto'}}
+                    />
         </Stack>
+
 
 
     )

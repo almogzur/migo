@@ -1,19 +1,12 @@
 import Head from "next/head";
-import { Geist, Geist_Mono } from "next/font/google";
-import  NavigationBar from "@/components/navigation_bar";
+import NavigationBar from "@/components/navigation_bar";
 import MainSection from "@/components/main_section";
 import WhoWeAre from "@/components/who_we_are";
 import WhyWeOpened from "@/components/why_we_opened";
+import MovingFast from "@/components/moving_fast";
+import { Container } from "@mui/material";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export default function Home() {
   return (
@@ -24,10 +17,18 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/migo.png" />
       </Head>
-      <NavigationBar/>
-      <MainSection/>
-      <WhoWeAre/>
-      <WhyWeOpened/>
+
+      <Container>
+
+      <NavigationBar />
+
+      {/* Sections */}
+      <MainSection />
+      <WhoWeAre />
+      <WhyWeOpened />
+      <MovingFast />
+
+      </Container>
 
     </>
   );

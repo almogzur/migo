@@ -1,6 +1,3 @@
-
-
-
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
@@ -11,16 +8,21 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { Fragment, useState } from 'react';
 import { ButtonProps } from '@mui/material/Button';
+import { DialogProps } from '@mui/material/Dialog';
+import Image from 'next/image';
+
 export type DialogPropsType   = {
   
-    modalTitle?:string
+    modalTitle:string
 
-    openButtonText:string
-    openBtnProps?:ButtonProps
+    openBtnText?:string
+    closedBtnText?:string
+    openBtnImage?:string
     
+    openBtnProps?:ButtonProps    
     closedBtnProps?:ButtonProps
-    closedBittonText:string
 
+    dialogProps?:DialogProps
     children?:React.ReactNode
 }
 
@@ -33,7 +35,17 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-export default function CustomizedDialogs({closedBittonText,openButtonText,openBtnProps,closedBtnProps,children,modalTitle}:DialogPropsType) {
+export default function CustomizedDialogs({
+    closedBtnText,
+    openBtnText,
+    openBtnProps,
+    closedBtnProps,
+    children,
+    modalTitle,
+    dialogProps,
+    openBtnImage
+
+   }:DialogPropsType) {
   
   const [open, setOpen] = useState(false);
 
@@ -47,19 +59,21 @@ export default function CustomizedDialogs({closedBittonText,openButtonText,openB
   return (
     <Fragment>
       <Button
-        variant="outlined"
+        variant="text"
        onClick={handleClickOpen}
         {...openBtnProps}
        >
-      {openButtonText}
+      { openBtnText}
+      {openBtnImage && <Image src={openBtnImage} alt={''} height={150} width={150} />}
       </Button>
 
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
+        {...dialogProps}
       >
-        <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
+        <DialogTitle  sx={{ m: 0, p: 2 , direction:"rtl" }} id={modalTitle}>
           {modalTitle}
         </DialogTitle>
         <IconButton
@@ -67,9 +81,10 @@ export default function CustomizedDialogs({closedBittonText,openButtonText,openB
           onClick={handleClose}
           sx={(theme) => ({
             position: 'absolute',
-            right: 8,
+            left: 8,
             top: 8,
-            color: theme.palette.grey[500],
+            color: theme.palette.grey[700],
+            scale:1.5
           })}
         >
           <CloseIcon />
@@ -77,15 +92,17 @@ export default function CustomizedDialogs({closedBittonText,openButtonText,openB
         <DialogContent dividers>
           {children}
         </DialogContent>
+
         <DialogActions>
           <Button 
              {...closedBtnProps}
              autoFocus
              onClick={handleClose}
              >
-            {closedBittonText}
+            {closedBtnText}
           </Button>
         </DialogActions>
+
       </BootstrapDialog>
     </Fragment>
   );
