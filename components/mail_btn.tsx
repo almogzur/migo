@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button } from '@mui/material';
-import EmailIcon from '@mui/icons-material/Email';
 import Image from 'next/image';
 
 const EmailButton = ({

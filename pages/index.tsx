@@ -5,6 +5,7 @@ import WhoWeAre from "@/components/who_we_are";
 import WhyWeOpened from "@/components/why_we_opened";
 import MovingFast from "@/components/moving_fast";
 import { Container } from "@mui/material";
+import Footer from "@/components/footer";
 
 
 
@@ -27,9 +28,8 @@ export default function Home() {
       <WhoWeAre />
       <WhyWeOpened />
       <MovingFast />
-
+      <Footer/>
       </Container>
-
     </>
   );
 }

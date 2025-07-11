@@ -2,7 +2,6 @@ import { Stack, Button } from "@mui/material";
 import Image from "next/image";
 import CustomizedDialogs from "./dialog";
 import WhatsAppBtn from "./whatsapp_btn";
-import MailBtn from "@/components/mail_btn";
 import { useRouter } from "next/router";
 import { useWindowSize } from "@/context/window_size";
 import MailButton from "@/components/mail_btn";
@@ -75,6 +74,7 @@ export default function NavigationBar() {
                         דף הבית
                     </Button>
                 }
+
             </Stack>
 
 

@@ -21,10 +21,11 @@ export default function MovingFast() {
   const textStackWidth = isMobile ? "100%" : "50%";
 
   return (
-        <motion.div
+   <motion.div
     initial={{y:200}}
     animate={{y:0}} 
     transition={{duration: 1}}
+    style={{marginBottom: isMobile ? 200: 100}}
     
     >
     <Stack
