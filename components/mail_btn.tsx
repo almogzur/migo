@@ -2,15 +2,18 @@ import React from 'react';
 import { Button } from '@mui/material';
 import Image from 'next/image';
 
-const EmailButton = ({
-  email = 'example@example.com',
-  subject = 'Hello!',
-  body = 'I wanted to reach out...',
-}: {
+
+export  type EmailButtonProps = {
   email?: string;
   subject?: string;
   body?: string;
-}) => {
+}
+
+const EmailButton = ({
+  email = 'almogz.dev@gamil.com',
+  subject = '!',
+  body = 'I wanted to reach out...',
+}: EmailButtonProps ) => {
   const handleClick = () => {
     const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailtoLink;
