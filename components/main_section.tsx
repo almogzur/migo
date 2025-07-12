@@ -1,5 +1,5 @@
 import { useWindowSize } from "@/context/window_size";
-import { Button, Stack, Typography } from "@mui/material";
+import {  Stack, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import Image from "next/image";
 import {motion} from "framer-motion"

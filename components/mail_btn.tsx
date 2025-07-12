@@ -1,7 +1,6 @@
 import React from 'react';
 import {  Button } from '@mui/material';
 import { FcFeedback } from "react-icons/fc";
-import { s } from 'motion/react-client';
 
 
 export  type EmailButtonProps = {
