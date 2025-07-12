@@ -4,6 +4,8 @@ import { useWindowSize } from '@/context/window_size';
 import WhatsappButton from './whatsapp_btn';
 import MailButton from '@/components/mail_btn';
 import FacebookButton from './facebook_button';
+import { getDeviceType } from './navigation_bar';
+import PhoneButton from './phone_button';
 
 export default function Footer() {
     const { isMobile, } = useWindowSize();
@@ -31,9 +33,13 @@ export default function Footer() {
             <Stack
                 direction="row"
                 justifyContent="center">
-                    <WhatsappButton height={50} width={50} />
-                    <MailButton height={40} width={40} />
-                    <FacebookButton height={50} width={50} />
+                    <WhatsappButton />
+                    <MailButton />
+                    <FacebookButton  />
+                           {getDeviceType() === 'Mobile' &&
+                                            <PhoneButton />
+                                               }
+
             </Stack>
 
             <Stack>

@@ -8,7 +8,7 @@ interface WhatsappButtonProps {
   dialcode?: string; // Must be full country code like '972'
   invitecode?: string;
   redirect?: boolean; // If true, always use web link
-  size:number
+  size?:number
 }
 
 export const WhatsappButton: React.FC<WhatsappButtonProps> = ({
