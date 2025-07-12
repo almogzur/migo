@@ -5,6 +5,21 @@ import WhatsAppBtn from "./whatsapp_btn";
 import { useRouter } from "next/router";
 import { useWindowSize } from "@/context/window_size";
 import MailButton from "@/components/mail_btn";
+import PhoneButton from "./phone_button";
+import FacebookButton from "./facebook_button";
+
+
+ export   function getDeviceType() {
+        const userAgent = navigator.userAgent;
+        if (/Mobi|Android/i.test(userAgent)) {
+            return "Mobile";
+        } else if (/Tablet|iPad/i.test(userAgent)) {
+            return "Tablet";
+        } else {
+            return "Desktop";
+        }
+    }
+
 
 
 export default function NavigationBar() {
@@ -12,9 +27,11 @@ export default function NavigationBar() {
     const router = useRouter();
     const { isMobile, isTablet } = useWindowSize();
 
-      const isSmallScreen = isMobile || isTablet;
-      const imageWidthSize = isMobile ? 100 : isTablet ? 120 : 140;
-        const imageHeightSize = isMobile ? 100 : 120;
+    const isSmallScreen = isMobile || isTablet;
+    const imageWidthSize = isMobile ? 100 : isTablet ? 120 : 140;
+    const imageHeightSize = isMobile ? 100 : 120;
+
+
 
 
     return (
@@ -24,12 +41,12 @@ export default function NavigationBar() {
             width={"100%"}
             height={"70px"}
             alignItems={"center"}
-            
-            
+
+
         >
             <Stack
                 direction={"row"}
-                sx={{  marginRight: isSmallScreen ? 0 : "20px" }}
+                sx={{ marginRight: isSmallScreen ? 0 : "20px" }}
                 gap={0}
                 alignItems={"center"}
                 justifyItems={"center"}
@@ -38,33 +55,36 @@ export default function NavigationBar() {
 
                 <CustomizedDialogs
                     openBtnText="צור קשר"
-                    openBtnProps={{
-                              
-                        sx: { 
-                         
-                             width: "100px",
-                  
-
-                             }
-                    }}
-                    modalTitle="אפשריות יצירת קשר "
+                    openBtnProps={{ sx: { width: "100px" } }}
+                    modalTitle="אפשריות  "
                     closedBtnText={"סגור"}
-                >
-                    <WhatsAppBtn />
-                
-                    <MailButton />
-                
+                    dialogProps={{  fullWidth: true}}
+                    >
+                    <Stack
+                        direction={isSmallScreen ? "column" : "row"}
+                        justifyContent={'center'}
+                        alignItems={'center'}
+                    >
+                        <WhatsAppBtn size={100} />
+                        <MailButton size={100}/>
+                        <FacebookButton size={100}/>
+                         {getDeviceType() === 'Mobile' &&
+                        <PhoneButton size={100}/>
+                           }
+
+
+                    </Stack>
 
 
 
                 </CustomizedDialogs>
 
                 {router.pathname !== "/about" &&
-                 <Button
-                    variant="text"
-                    onClick={() => router.push("/about")}
-                >אודות
-                </Button>}
+                    <Button
+                        variant="text"
+                        onClick={() => router.push("/about")}
+                    >אודות
+                    </Button>}
 
                 {router.pathname !== "/" &&
                     <Button
@@ -84,8 +104,8 @@ export default function NavigationBar() {
                 alt="migo"
                 width={imageWidthSize}
                 height={imageHeightSize}
-                style={{ marginRight:'auto'}}
-                    />
+                style={{ marginRight: 'auto' }}
+            />
         </Stack>
 
 

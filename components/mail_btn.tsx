@@ -1,33 +1,39 @@
 import React from 'react';
-import { Button } from '@mui/material';
-import Image from 'next/image';
+import {  Button } from '@mui/material';
+import { FcFeedback } from "react-icons/fc";
+import { s } from 'motion/react-client';
 
 
 export  type EmailButtonProps = {
   email?: string;
   subject?: string;
   body?: string;
+  size?: number
 }
 
 const EmailButton = ({
   email = 'almogz.dev@gamil.com',
-  subject = '!',
-  body = 'I wanted to reach out...',
+  subject = '',
+  body = 'היי הגעתי מהאתר ',
+  size = 40
+
 }: EmailButtonProps ) => {
+
+
   const handleClick = () => {
     const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailtoLink;
   };
 
   return (
+
     <Button
       variant="text"
-
-
       onClick={handleClick}
     >
-        <Image src={'/mail_icon.png'} alt={''} height={150} width={150} />
+      <FcFeedback size={size}/>
     </Button>
+
   );
 };
 

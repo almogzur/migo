@@ -10,6 +10,7 @@ import { Fragment, useState } from 'react';
 import { ButtonProps } from '@mui/material/Button';
 import { DialogProps } from '@mui/material/Dialog';
 import Image from 'next/image';
+import { useWindowSize } from '@/context/window_size';
 
 export type DialogPropsType   = {
   
@@ -22,7 +23,7 @@ export type DialogPropsType   = {
     openBtnProps?:ButtonProps    
     closedBtnProps?:ButtonProps
 
-    dialogProps?:DialogProps
+    dialogProps?:Omit<DialogProps, 'open' | 'onClose'>
     children?:React.ReactNode
 }
 
@@ -46,6 +47,9 @@ export default function CustomizedDialogs({
     openBtnImage
 
    }:DialogPropsType) {
+
+
+
   
   const [open, setOpen] = useState(false);
 
@@ -69,26 +73,13 @@ export default function CustomizedDialogs({
 
       <BootstrapDialog
         onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
+        aria-labelledby={modalTitle}
         open={open}
         {...dialogProps}
       >
-        <DialogTitle  sx={{ m: 0, p: 2 , direction:"rtl" }} id={modalTitle}>
-          {modalTitle}
-        </DialogTitle>
-        <IconButton
-          aria-label="close"
-          onClick={handleClose}
-          sx={(theme) => ({
-            position: 'absolute',
-            left: 8,
-            top: 8,
-            color: theme.palette.grey[700],
-            scale:1.5
-          })}
-        >
-          <CloseIcon />
-        </IconButton>
+
+
+
         <DialogContent dividers>
           {children}
         </DialogContent>
@@ -104,6 +95,7 @@ export default function CustomizedDialogs({
         </DialogActions>
 
       </BootstrapDialog>
+
     </Fragment>
   );
 }

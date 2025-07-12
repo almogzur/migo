@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Box } from '@mui/material';
-import Image from 'next/image';
+import React, {  useEffect, useState } from 'react';
+import { Button } from '@mui/material';
+import { TbBrandWhatsappFilled } from "react-icons/tb";
 
 interface WhatsappButtonProps {
   phone?: string;
@@ -8,6 +8,7 @@ interface WhatsappButtonProps {
   dialcode?: string; // Must be full country code like '972'
   invitecode?: string;
   redirect?: boolean; // If true, always use web link
+  size:number
 }
 
 export const WhatsappButton: React.FC<WhatsappButtonProps> = ({
@@ -15,6 +16,8 @@ export const WhatsappButton: React.FC<WhatsappButtonProps> = ({
   text = 'שלום הגעתי מאתר ',
   dialcode = '972',
   invitecode = '',
+  size=40
+
 
 }) => {
   const [link, setLink] = useState('');
@@ -39,11 +42,11 @@ export const WhatsappButton: React.FC<WhatsappButtonProps> = ({
   };
 
   return (
-    <Box>
+
       <Button onClick={handleClick} variant="text">
-        <Image src="/whatsapp_icon.png" alt="WhatsApp" width={150} height={150} />
+        <TbBrandWhatsappFilled color={'#37db52'} size={size} />
       </Button>
-    </Box>
+
   );
 };
 
